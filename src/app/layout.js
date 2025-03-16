@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         <style jsx global>{`
           @font-face {
             font-family: 'CustomFont';
-            src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2') format('woff2');
+            src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/Rena.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
           
           @font-face {
             font-family: 'CustomFontBold';
-            src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2') format('woff2');
+            src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/Rena.woff2') format('woff2');
             font-weight: bold;
             font-style: normal;
             font-display: swap;
