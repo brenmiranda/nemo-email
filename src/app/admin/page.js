@@ -8,11 +8,11 @@ export default function Admin() {
     <div className="container">
       <div className="app-header">
         <h1>Email Signature Generator</h1>
-        <p>Admin Panel - Configure your signature settings</p>
+        <p>Style Settings - Configure your signature appearance</p>
         
         <div className="nav-links">
           <Link href="/">Generator</Link>
-          <Link href="/admin">Admin Panel</Link>
+          <Link href="/admin">Style Settings</Link>
         </div>
       </div>
       
