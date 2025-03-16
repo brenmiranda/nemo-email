@@ -7,12 +7,6 @@ import Select from 'react-select';
 export default function SignatureForm() {
   const { formData, updateFormData, adminSettings } = useSignature();
   
-  // Convert the logos array to format required by react-select
-  const logoOptions = adminSettings.logos.map(logo => ({
-    value: logo.value,
-    label: logo.label
-  }));
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     updateFormData({ [name]: value });
@@ -77,7 +71,7 @@ export default function SignatureForm() {
         <label htmlFor="selectedLogo">Company Logo</label>
         <Select
           id="selectedLogo"
-          options={logoOptions}
+          options={adminSettings.logos}
           onChange={handleLogoChange}
           placeholder="Select a logo..."
           classNamePrefix="select"
