@@ -13,11 +13,20 @@
 }
 
 @font-face {
-  font-family: 'CustomFontBold';
+  font-family: 'CustomFontMedium';
   src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2') format('woff2');
+  font-weight: 500 !important;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CustomFontBold';
+  src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2') format('woff2-variations');
   font-weight: 700 !important;
   font-style: normal;
   font-display: swap;
+  font-variation-settings: 'wght' 700; /* Explicitly set the weight variation */
 }
 
 /* 
@@ -41,6 +50,9 @@
 .name-text {
   font-family: 'CustomFontBold', sans-serif !important;
   font-weight: 700 !important;
+  /* Additional properties to ensure bold rendering */
+  -webkit-text-stroke: 0.45px; /* Slightly thicker text */
+  letter-spacing: -0.01em; /* Tighter spacing often helps with bold text */
 }
 
 .position-text {
