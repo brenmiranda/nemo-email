@@ -1,5 +1,6 @@
 import './globals.css';
 import { SignatureProvider } from '../contexts/SignatureContext';
+import FontLoader from '../components/FontLoader';
 
 export const metadata = {
   title: 'Email Signature Generator',
@@ -11,6 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <SignatureProvider>
+          <FontLoader />
           {children}
         </SignatureProvider>
       </body>
