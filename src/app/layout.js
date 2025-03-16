@@ -1,4 +1,5 @@
 import './globals.css';
+import './fonts.css';
 import { SignatureProvider } from '../contexts/SignatureContext';
 import FontLoader from '../components/FontLoader';
 
