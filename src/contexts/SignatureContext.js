@@ -34,9 +34,9 @@ export const SignatureProvider = ({ children }) => {
     // Font settings (direct URLs for each weight)
     fontFamily: 'CustomFont, sans-serif',
     fontUrls: {
-      regular: 'https://example.com/fonts/CustomFont-Regular.woff2',
-      medium: 'https://example.com/fonts/CustomFont-Medium.woff2',
-      bold: 'https://example.com/fonts/CustomFont-Bold.woff2',
+      regular: '',
+      medium: '',
+      bold: '',
     },
     
     // Use direct URLs instead of GitHub repo
