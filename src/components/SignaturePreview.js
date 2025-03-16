@@ -32,8 +32,11 @@ export default function SignaturePreview() {
           ref={signatureRef}
           className="signature-wrapper"
           style={{
-            fontFamily: `${adminSettings.fontFamily} !important`,
-            paddingLeft: `${adminSettings.leftBuffer}px`
+            fontFamily: `CustomFont, sans-serif !important`,
+            paddingLeft: `${adminSettings.leftBuffer}px`,
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale',
+            textRendering: 'optimizeLegibility'
           }}
         >
           {/* Full Name */}
@@ -43,7 +46,9 @@ export default function SignaturePreview() {
                 color: '#000000',
                 marginBottom: `${adminSettings.lineSpacing}px`,
                 fontWeight: adminSettings.fullNameWeight,
-                fontFamily: `${adminSettings.fontFamily} !important`
+                fontFamily: `CustomFont, sans-serif !important`,
+                fontVariationSettings: `'wght' ${adminSettings.fullNameWeight}`,
+                letterSpacing: '0.01em'
               }}
             >
               {formData.fullName}
@@ -57,7 +62,9 @@ export default function SignaturePreview() {
                 color: 'rgba(0, 0, 0, 0.5)',
                 marginBottom: `${adminSettings.lineSpacing}px`,
                 fontWeight: adminSettings.positionWeight,
-                fontFamily: `${adminSettings.fontFamily} !important`
+                fontFamily: `CustomFont, sans-serif !important`,
+                fontVariationSettings: `'wght' ${adminSettings.positionWeight}`,
+                letterSpacing: '0.01em'
               }}
             >
               {formData.position}
@@ -71,7 +78,9 @@ export default function SignaturePreview() {
                 color: 'rgba(0, 0, 0, 0.5)',
                 marginBottom: `${adminSettings.lineSpacing}px`,
                 fontWeight: adminSettings.contactWeight,
-                fontFamily: `${adminSettings.fontFamily} !important`
+                fontFamily: `CustomFont, sans-serif !important`,
+                fontVariationSettings: `'wght' ${adminSettings.contactWeight}`,
+                letterSpacing: '0.01em'
               }}
             >
               {contactLine()}
