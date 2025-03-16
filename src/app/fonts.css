@@ -1,3 +1,67 @@
+/* 
+ * This CSS uses separate font declarations for different weights
+ * even though they may point to the same font file.
+ * This helps browsers handle variable fonts more consistently.
+ */
+
+@font-face {
+  font-family: 'CustomFontRegular';
+  src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2') format('woff2');
+  font-weight: 400 !important;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CustomFontMedium';
+  src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2') format('woff2');
+  font-weight: 500 !important;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CustomFontBold';
+  src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2') format('woff2');
+  font-weight: 700 !important;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 
+ * Add additional smoothing and optimization CSS 
+ * for all signature text elements
+ */
+.signature-wrapper, 
+.signature-wrapper div, 
+.signature-wrapper span, 
+.signature-wrapper p {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+  transform: translateZ(0); /* Forces hardware acceleration */
+}
+
+/* 
+ * These explicit classes can be used instead of inline styles
+ * for more consistent rendering
+ */
+.name-text {
+  font-family: 'CustomFontBold', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.position-text {
+  font-family: 'CustomFontRegular', sans-serif !important;
+  font-weight: 400 !important;
+}
+
+.contact-text {
+  font-family: 'CustomFontRegular', sans-serif !important;
+  font-weight: 400 !important;
+}
+
+
 /* Fallback system fonts in case custom fonts fail to load */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
