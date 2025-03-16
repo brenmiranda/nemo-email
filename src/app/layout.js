@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         {/* Preload fonts to avoid flash of unstyled text */}
         <link
           rel="preload"
-          href="/fonts/RenaVF-pre-redraw.woff2"
+          href="https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
