@@ -4,9 +4,9 @@ import { createContext, useState, useContext, useEffect } from 'react';
 
 // Pre-defined assets - replace these URLs with your actual font and logo URLs
 const FONTS = {
-  regular: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.ttf',
-  medium: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.ttf',
-  bold: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.ttf',
+  regular: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.woff2',
+  medium: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.woff2',
+  bold: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.woff2',
 };
 
 const LOGOS = [
