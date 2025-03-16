@@ -15,7 +15,7 @@ export default function FontLoader() {
     const fontFaces = `
       @font-face {
         font-family: 'CustomFont';
-        src: url('${adminSettings.fontUrls.regular}') format('ttf');
+        src: url('${adminSettings.fontUrls.regular}') format('woff2');
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -23,7 +23,7 @@ export default function FontLoader() {
       
       @font-face {
         font-family: 'CustomFont';
-        src: url('${adminSettings.fontUrls.medium}') format('ttf');
+        src: url('${adminSettings.fontUrls.medium}') format('woff2');
         font-weight: 500;
         font-style: normal;
         font-display: swap;
@@ -31,7 +31,7 @@ export default function FontLoader() {
       
       @font-face {
         font-family: 'CustomFont';
-        src: url('${adminSettings.fontUrls.bold}') format('ttf');
+        src: url('${adminSettings.fontUrls.bold}') format('woff2');
         font-weight: 700;
         font-style: normal;
         font-display: swap;
@@ -81,7 +81,7 @@ export default function FontLoader() {
     link.rel = 'preload';
     link.href = url;
     link.as = 'font';
-    link.type = 'font/ttf';
+    link.type = 'font/woff2';
     link.crossOrigin = 'anonymous';
     link.dataset.fontPreload = 'true';
     document.head.appendChild(link);
