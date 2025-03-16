@@ -7,6 +7,9 @@ export default function FontLoader() {
   const { adminSettings } = useSignature();
   
   useEffect(() => {
+    // Make sure fontUrls exists before proceeding
+    if (!adminSettings.fontUrls) return;
+    
     // Create a style element for font-face declarations
     const style = document.createElement('style');
     
@@ -14,7 +17,7 @@ export default function FontLoader() {
     const fontFaces = `
       @font-face {
         font-family: 'CustomFont';
-        src: url('${adminSettings.fontUrls.regular}') format('woff2');
+        src: url('${adminSettings.fontUrls.regular || ''}') format('woff2');
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -22,7 +25,7 @@ export default function FontLoader() {
       
       @font-face {
         font-family: 'CustomFont';
-        src: url('${adminSettings.fontUrls.medium}') format('woff2');
+        src: url('${adminSettings.fontUrls.medium || ''}') format('woff2');
         font-weight: 500;
         font-style: normal;
         font-display: swap;
@@ -30,7 +33,7 @@ export default function FontLoader() {
       
       @font-face {
         font-family: 'CustomFont';
-        src: url('${adminSettings.fontUrls.bold}') format('woff2');
+        src: url('${adminSettings.fontUrls.bold || ''}') format('woff2');
         font-weight: 700;
         font-style: normal;
         font-display: swap;
