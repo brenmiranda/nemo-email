@@ -17,7 +17,7 @@ export default function ExportButton({ signatureRef }) {
       // Configure html2canvas for high quality, transparent PNG
       const canvas = await html2canvas(signatureRef.current, {
         backgroundColor: null, // Transparent background
-        scale: 2, // Higher scale for better quality
+        scale: 4, // Higher scale for better quality
         logging: false,
         useCORS: true, // Enable CORS for external images
         allowTaint: true,
