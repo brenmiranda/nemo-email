@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import SignatureForm from '../components/SignatureForm';
 import SignaturePreview from '../components/SignaturePreview';
+import FontDebug from '../components/FontDebug';
 
 export default function Home() {
   return (
@@ -20,6 +21,10 @@ export default function Home() {
       <div className="main-layout">
         <SignatureForm />
         <SignaturePreview />
+      </div>
+      
+      <div style={{ textAlign: 'center' }}>
+        <FontDebug />
       </div>
     </div>
   );
