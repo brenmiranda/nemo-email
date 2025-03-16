@@ -25,19 +25,22 @@ export const SignatureProvider = ({ children }) => {
     lineSpacing: 26,
     leftBuffer: 14,
     
-    // Available logos
+    // Available logos (using direct URLs)
     logos: [
-      { value: 'https://github.com/brenmiranda/nemo-email/blob/main/logos/01%20-%20Steel%20&%20Black.png?raw=true', label: '01 - Steel & Black' },
-      { value: 'https://github.com/brenmiranda/nemo-email/blob/main/logos/02%20-%20Flat%20Logo%20&%20Black.png?raw=true', label: '02 - Flat Logo & Black' },
-      { value: 'https://github.com/brenmiranda/nemo-email/blob/main/logos/03%20-%20Flat%20Logo%20&%20White.png?raw=true', label: '03 - Flat Logo & White' },
-      { value: 'https://github.com/brenmiranda/nemo-email/blob/main/logos/04%20-%20Steel%20&%20White.png?raw=true', label: '04 - Steel & White' },
+      { value: 'https://example.com/logo1.png', label: 'Logo 1' },
+      { value: 'https://example.com/logo2.png', label: 'Logo 2' },
     ],
     
-    // GitHub repo info for assets
-    repoBaseUrl: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/main',
+    // Font settings (direct URLs for each weight)
+    fontFamily: 'CustomFont, sans-serif',
+    fontUrls: {
+      regular: 'https://example.com/fonts/CustomFont-Regular.woff2',
+      medium: 'https://example.com/fonts/CustomFont-Medium.woff2',
+      bold: 'https://example.com/fonts/CustomFont-Bold.woff2',
+    },
     
-    // Font family from GitHub
-    fontFamily: 'RenaRegular, RenaBold, sans-serif',
+    // Use direct URLs instead of GitHub repo
+    useDirectUrls: true,
   });
 
   // Load admin settings from localStorage if available
