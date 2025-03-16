@@ -20,7 +20,16 @@ export default function ExportButton({ signatureRef }) {
         scale: 2, // Higher scale for better quality
         logging: false,
         useCORS: true, // Enable CORS for external images
-        allowTaint: true
+        allowTaint: true,
+        onclone: (clonedDoc) => {
+          // Ensure fonts are applied in the cloned document
+          const signatureElements = clonedDoc.querySelectorAll('.signature-wrapper *');
+          signatureElements.forEach(el => {
+            if (el.style) {
+              el.style.fontFamily = 'CustomFont, sans-serif !important';
+            }
+          });
+        }
       });
       
       // Create download link
