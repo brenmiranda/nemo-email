@@ -51,22 +51,19 @@ signature-generator/
    npm install
    ```
 
-3. **Set up your GitHub repository for assets**
+3. **Prepare your font and image files**
 
-   This application expects your fonts and logos to be hosted in a GitHub repository. The structure should be:
-
-   ```
-   /fonts/*.woff2   # Font files
-   /logos/*.png     # Logo files
-   ```
+   This application uses direct URLs to your fonts and logos. Make sure they're publicly accessible through URLs.
 
 4. **Configure the application**
 
-   Go to the Admin Panel and set your GitHub repository URL. It should be in the format:
+   Go to the Admin Panel and set your font and logo URLs. For fonts, you'll need URLs for:
    
-   ```
-   https://raw.githubusercontent.com/yourusername/your-repo/main
-   ```
+   - Regular weight (400)
+   - Medium weight (500)
+   - Bold weight (700)
+
+   And for logos, add direct URLs to your image files.
 
 5. **Add your logos**
 
@@ -105,8 +102,8 @@ signature-generator/
 
 - **Font Weights**: Set different font weights for each field in the Admin Panel
 - **Spacing**: Adjust the space between lines and the left buffer
-- **Logos**: Add or remove logo options from your GitHub repository
-- **Repository URL**: Update the base URL for your GitHub repository
+- **Logos**: Add or remove logo options by providing direct URLs
+- **Font URLs**: Update the URLs for each font weight (Regular, Medium, Bold)
 
 ## License
 
