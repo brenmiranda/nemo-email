@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: Rena, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #333;
   background-color: #f5f5f5;
   line-height: 1.6;
@@ -185,24 +185,24 @@ body {
 
 /* Custom font loading */
 @font-face {
-  font-family: 'CustomFont';
-  src: url('https://raw.githubusercontent.com/yourusername/your-repo/main/fonts/CustomFont-Regular.woff2') format('woff2');
+  font-family: 'Rena';
+  src: url('https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.ttf') format('ttf');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CustomFont';
-  src: url('https://raw.githubusercontent.com/yourusername/your-repo/main/fonts/CustomFont-Medium.woff2') format('woff2');
+  font-family: 'Rena';
+  src: url('https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.ttf') format('ttf');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'CustomFont';
-  src: url('https://raw.githubusercontent.com/yourusername/your-repo/main/fonts/CustomFont-Bold.woff2') format('woff2');
+  font-family: 'Rena';
+  src: url('https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.ttf') format('ttf');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
