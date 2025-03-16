@@ -4,16 +4,16 @@ import { createContext, useState, useContext, useEffect } from 'react';
 
 // Pre-defined assets - replace these URLs with your actual font and logo URLs
 const FONTS = {
-  regular: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.woff2',
-  medium: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.woff2',
-  bold: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.woff2',
+  regular: 'https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2',
+  medium: 'https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2',
+  bold: 'https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2',
 };
 
 const LOGOS = [
-  { value: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/refs/heads/main/logos/01%20-%20Steel%20%26%20Black.png', label: 'Primary Logo' },
-  { value: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/refs/heads/main/logos/02%20-%20Flat%20Logo%20%26%20Black.png', label: 'Secondary Logo' },
-  { value: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/refs/heads/main/logos/03%20-%20Flat%20Logo%20%26%20White.png', label: 'White on White' },
-  { value: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/refs/heads/main/logos/04%20-%20Steel%20%26%20White.png', label: 'Steel on White' },
+  { value: 'https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/logos/01%20-%20Steel%20%26%20Black.png', label: 'Primary Logo' },
+  { value: 'https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/logos/02%20-%20Flat%20Logo%20%26%20Black.png', label: 'Secondary Logo' },
+  { value: 'https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/logos/03%20-%20Flat%20Logo%20%26%20White.png', label: 'White on White' },
+  { value: 'https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/logos/04%20-%20Steel%20%26%20White.png', label: 'Steel on White' },
 ];
 
 const SignatureContext = createContext();
