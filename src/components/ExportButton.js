@@ -8,12 +8,24 @@ export default function ExportButton({ signatureRef }) {
   const [exporting, setExporting] = useState(false);
   const { formData, adminSettings } = useSignature();
   
+  // Helper function to determine font family based on weight
+  const getFontFamily = (weight) => {
+    if (weight >= 700) return 'CustomFontBold';
+    if (weight >= 500) return 'CustomFontMedium';
+    return 'CustomFontRegular';
+  };
+  
   const exportAsPNG = async () => {
     if (!signatureRef.current) return;
     
     setExporting(true);
     
     try {
+      // Before export, we need to ensure all fonts are fully loaded
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+      
       // Configure html2canvas for high quality, transparent PNG
       const canvas = await html2canvas(signatureRef.current, {
         backgroundColor: null, // Transparent background
@@ -22,30 +34,37 @@ export default function ExportButton({ signatureRef }) {
         useCORS: true, // Enable CORS for external images
         allowTaint: true,
         onclone: (clonedDoc) => {
-          // Apply font variation settings and weights to ensure consistent display
-          const signatureElements = clonedDoc.querySelectorAll('.signature-wrapper *');
-          signatureElements.forEach(el => {
+          // Get all the signature elements
+          const fullNameEl = clonedDoc.querySelector('.name-text');
+          const positionEl = clonedDoc.querySelector('.position-text');
+          const contactEl = clonedDoc.querySelector('.contact-text');
+          
+          // Apply specific styles to ensure consistent appearance
+          if (fullNameEl) {
+            const fontFamily = getFontFamily(adminSettings.fullNameWeight);
+            fullNameEl.style.fontFamily = `${fontFamily}, sans-serif !important`;
+            fullNameEl.style.fontWeight = `${adminSettings.fullNameWeight} !important`;
+          }
+          
+          if (positionEl) {
+            const fontFamily = getFontFamily(adminSettings.positionWeight);
+            positionEl.style.fontFamily = `${fontFamily}, sans-serif !important`;
+            positionEl.style.fontWeight = `${adminSettings.positionWeight} !important`;
+          }
+          
+          if (contactEl) {
+            const fontFamily = getFontFamily(adminSettings.contactWeight);
+            contactEl.style.fontFamily = `${fontFamily}, sans-serif !important`;
+            contactEl.style.fontWeight = `${adminSettings.contactWeight} !important`;
+          }
+          
+          // Apply additional rendering styles to all elements
+          const allElements = clonedDoc.querySelectorAll('.signature-wrapper *');
+          allElements.forEach(el => {
             if (el.style) {
-              el.style.fontFamily = 'CustomFont, sans-serif !important';
-              
-              // Also apply font smoothing properties
               el.style.WebkitFontSmoothing = 'antialiased';
               el.style.MozOsxFontSmoothing = 'grayscale';
               el.style.textRendering = 'optimizeLegibility';
-              
-              // Apply correct variation settings based on element type
-              if (el.textContent && el.textContent.trim() === formData.fullName) {
-                el.style.fontVariationSettings = `'wght' ${adminSettings.fullNameWeight}`;
-                el.style.fontWeight = adminSettings.fullNameWeight;
-              } else if (el.textContent && el.textContent.trim() === formData.position) {
-                el.style.fontVariationSettings = `'wght' ${adminSettings.positionWeight}`;
-                el.style.fontWeight = adminSettings.positionWeight;
-              } else if (el.textContent && 
-                        (el.textContent.includes(formData.phoneNumber) || 
-                         el.textContent.includes(formData.email))) {
-                el.style.fontVariationSettings = `'wght' ${adminSettings.contactWeight}`;
-                el.style.fontWeight = adminSettings.contactWeight;
-              }
             }
           });
         }
@@ -53,7 +72,11 @@ export default function ExportButton({ signatureRef }) {
       
       // Create download link
       const link = document.createElement('a');
-      link.download = `email-signature-${formData.fullName.replace(/\s+/g, '-').toLowerCase() || 'untitled'}.png`;
+      const filename = formData.fullName 
+        ? `email-signature-${formData.fullName.replace(/\s+/g, '-').toLowerCase()}.png`
+        : 'email-signature.png';
+      
+      link.download = filename;
       
       // Convert to PNG with high quality
       link.href = canvas.toDataURL('image/png', 1.0);
