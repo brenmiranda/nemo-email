@@ -6,7 +6,7 @@ import { useSignature } from '../contexts/SignatureContext';
 
 export default function ExportButton({ signatureRef }) {
   const [exporting, setExporting] = useState(false);
-  const { formData } = useSignature();
+  const { formData, adminSettings } = useSignature();
   
   const exportAsPNG = async () => {
     if (!signatureRef.current) return;
@@ -17,16 +17,35 @@ export default function ExportButton({ signatureRef }) {
       // Configure html2canvas for high quality, transparent PNG
       const canvas = await html2canvas(signatureRef.current, {
         backgroundColor: null, // Transparent background
-        scale: 4, // Higher scale for better quality
+        scale: 3, // Higher scale for better quality
         logging: false,
         useCORS: true, // Enable CORS for external images
         allowTaint: true,
         onclone: (clonedDoc) => {
-          // Ensure fonts are applied in the cloned document
+          // Apply font variation settings and weights to ensure consistent display
           const signatureElements = clonedDoc.querySelectorAll('.signature-wrapper *');
           signatureElements.forEach(el => {
             if (el.style) {
               el.style.fontFamily = 'CustomFont, sans-serif !important';
+              
+              // Also apply font smoothing properties
+              el.style.WebkitFontSmoothing = 'antialiased';
+              el.style.MozOsxFontSmoothing = 'grayscale';
+              el.style.textRendering = 'optimizeLegibility';
+              
+              // Apply correct variation settings based on element type
+              if (el.textContent && el.textContent.trim() === formData.fullName) {
+                el.style.fontVariationSettings = `'wght' ${adminSettings.fullNameWeight}`;
+                el.style.fontWeight = adminSettings.fullNameWeight;
+              } else if (el.textContent && el.textContent.trim() === formData.position) {
+                el.style.fontVariationSettings = `'wght' ${adminSettings.positionWeight}`;
+                el.style.fontWeight = adminSettings.positionWeight;
+              } else if (el.textContent && 
+                        (el.textContent.includes(formData.phoneNumber) || 
+                         el.textContent.includes(formData.email))) {
+                el.style.fontVariationSettings = `'wght' ${adminSettings.contactWeight}`;
+                el.style.fontWeight = adminSettings.contactWeight;
+              }
             }
           });
         }
