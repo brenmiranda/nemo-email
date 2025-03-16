@@ -1,16 +1,15 @@
 # Email Signature Generator
 
-A web application that generates on-brand email signatures with customizable settings.
+A web application that generates on-brand email signatures with pre-defined brand fonts and logos.
 
 ## Features
 
 - Create email signatures with employee name, position, phone number, and email
 - Display contact information in the format "phone number | email address"
-- Add company logo from your GitHub repository
-- Customize font weights for different fields
+- Choose from pre-defined company logos
+- Customize font weights for different fields through the Style Settings
 - Adjust spacing between lines
 - Export signature as transparent PNG
-- Admin panel for configuring settings
 
 ## Project Structure
 
@@ -19,15 +18,17 @@ signature-generator/
 ├── public/              # Static assets
 ├── src/
 │   ├── app/             # Next.js App Router
-│   │   ├── page.js      # Main page
+│   │   ├── page.js      # Main generator page
 │   │   ├── layout.js    # Root layout
 │   │   ├── globals.css  # Global styles
-│   │   └── admin/       # Admin panel routes
+│   │   ├── fonts.css    # Font fallbacks
+│   │   └── admin/       # Style settings routes
 │   │       └── page.js
 │   ├── components/      # React components
 │   │   ├── SignatureForm.js
 │   │   ├── SignaturePreview.js
 │   │   ├── AdminPanel.js
+│   │   ├── FontLoader.js
 │   │   └── ExportButton.js
 │   └── contexts/        # React contexts
 │       └── SignatureContext.js
@@ -51,35 +52,32 @@ signature-generator/
    npm install
    ```
 
-3. **Prepare your font and image files**
+3. **Add your brand assets**
 
-   This application uses direct URLs to your fonts and logos. Make sure they're publicly accessible through URLs.
+   Before deploying, update the font and logo URLs in `src/contexts/SignatureContext.js`:
 
-4. **Configure the application**
+   ```javascript
+   // Pre-defined assets - replace these URLs with your actual font and logo URLs
+   const FONTS = {
+     regular: 'https://yourdomain.com/fonts/YourFont-Regular.woff2',
+     medium: 'https://yourdomain.com/fonts/YourFont-Medium.woff2',
+     bold: 'https://yourdomain.com/fonts/YourFont-Bold.woff2',
+   };
 
-   Go to the Admin Panel and set your font and logo URLs. For fonts, you'll need URLs for:
-   
-   - Regular weight (400)
-   - Medium weight (500)
-   - Bold weight (700)
+   const LOGOS = [
+     { value: 'https://yourdomain.com/logos/logo1.png', label: 'Primary Logo' },
+     { value: 'https://yourdomain.com/logos/logo2.png', label: 'Secondary Logo' },
+     { value: 'https://yourdomain.com/logos/logo3.png', label: 'Monochrome Logo' },
+   ];
+   ```
 
-   And for logos, add direct URLs to your image files.
-
-5. **Add your logos**
-
-   In the Admin Panel, add the filenames of your logo images located in your GitHub repository.
-
-6. **Update font settings (optional)**
-
-   If you want to use your own fonts, modify the @font-face declarations in `src/app/globals.css` to point to your font files.
-
-7. **Start the development server**
+4. **Start the development server**
 
    ```bash
    npm run dev
    ```
 
-8. **Build for production**
+5. **Build for production**
 
    ```bash
    npm run build
@@ -98,12 +96,13 @@ signature-generator/
    vercel
    ```
 
-## Customization
+## Customization for Users
 
-- **Font Weights**: Set different font weights for each field in the Admin Panel
-- **Spacing**: Adjust the space between lines and the left buffer
-- **Logos**: Add or remove logo options by providing direct URLs
-- **Font URLs**: Update the URLs for each font weight (Regular, Medium, Bold)
+Users can:
+
+- **Generate Signatures**: Enter details and select a logo from the pre-defined options
+- **Adjust Style Settings**: Modify font weights and spacing through the Style Settings page
+- **Export**: Download as a transparent PNG for use in email clients
 
 ## License
 
