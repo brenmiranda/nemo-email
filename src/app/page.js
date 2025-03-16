@@ -13,7 +13,7 @@ export default function Home() {
         
         <div className="nav-links">
           <Link href="/">Generator</Link>
-          <Link href="/admin">Admin Panel</Link>
+          <Link href="/admin">Style Settings</Link>
         </div>
       </div>
       
