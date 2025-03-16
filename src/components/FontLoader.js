@@ -11,28 +11,12 @@ export default function FontLoader() {
     // Create a style element for font-face declarations
     const style = document.createElement('style');
     
-    // Generate @font-face rules from pre-defined font URLs
+    // For variable fonts, we use a different approach - one declaration with weight range
     const fontFaces = `
       @font-face {
         font-family: 'CustomFont';
-        src: url('${adminSettings.fontUrls.regular}') format('woff2');
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-      
-      @font-face {
-        font-family: 'CustomFont';
-        src: url('${adminSettings.fontUrls.medium}') format('woff2');
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-      }
-      
-      @font-face {
-        font-family: 'CustomFont';
-        src: url('${adminSettings.fontUrls.bold}') format('woff2');
-        font-weight: 700;
+        src: url('${adminSettings.fontUrls.regular}') format('woff2-variations');
+        font-weight: 100 900; /* Full range for variable fonts */
         font-style: normal;
         font-display: swap;
       }
@@ -41,53 +25,53 @@ export default function FontLoader() {
     style.textContent = fontFaces;
     document.head.appendChild(style);
     
-    // Add preload links for the fonts to improve loading performance
-    adminSettings.fontUrls.regular && addPreloadLink(adminSettings.fontUrls.regular);
-    adminSettings.fontUrls.medium && addPreloadLink(adminSettings.fontUrls.medium);
-    adminSettings.fontUrls.bold && addPreloadLink(adminSettings.fontUrls.bold);
+    // Add font smoothing to improve rendering
+    const smoothingStyle = document.createElement('style');
+    smoothingStyle.textContent = `
+      .signature-wrapper, .signature-wrapper * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+    `;
+    document.head.appendChild(smoothingStyle);
+    
+    // Add preload link for the font
+    if (adminSettings.fontUrls.regular) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = adminSettings.fontUrls.regular;
+      link.as = 'font';
+      link.type = 'font/woff2';
+      link.crossOrigin = 'anonymous';
+      document.head.appendChild(link);
+    }
 
     // Use the Font Loading API to detect when fonts are loaded
     if ('fonts' in document) {
       Promise.all([
         document.fonts.load(`400 1em 'CustomFont'`),
-        document.fonts.load(`500 1em 'CustomFont'`),
         document.fonts.load(`700 1em 'CustomFont'`)
       ]).then(() => {
         setFontsLoaded(true);
-        console.log('All fonts loaded successfully!');
+        console.log('Variable font loaded successfully!');
       }).catch(err => {
         console.warn('Font loading issue:', err);
-        // Still set as loaded to not block the UI
         setFontsLoaded(true);
       });
     } else {
-      // If Font Loading API is not available, assume fonts will load with CSS
       setFontsLoaded(true);
     }
     
     // Clean up on unmount
     return () => {
       document.head.removeChild(style);
-      // Remove any preload links we added
-      document.querySelectorAll('link[data-font-preload="true"]').forEach(link => {
-        document.head.removeChild(link);
-      });
+      document.head.removeChild(smoothingStyle);
+      const preloadLink = document.querySelector('link[rel="preload"][as="font"]');
+      if (preloadLink) document.head.removeChild(preloadLink);
     };
   }, [adminSettings.fontUrls]);
   
-  // Helper function to add preload links
-  const addPreloadLink = (url) => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.href = url;
-    link.as = 'font';
-    link.type = 'font/woff2';
-    link.crossOrigin = 'anonymous';
-    link.dataset.fontPreload = 'true';
-    document.head.appendChild(link);
-  };
-  
-  // This shows a loading indicator while fonts are loading
   if (!fontsLoaded) {
     return (
       <div style={{ 
