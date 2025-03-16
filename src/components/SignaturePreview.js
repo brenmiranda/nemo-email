@@ -32,7 +32,7 @@ export default function SignaturePreview() {
           ref={signatureRef}
           className="signature-wrapper"
           style={{
-            fontFamily: adminSettings.fontFamily,
+            fontFamily: `${adminSettings.fontFamily} !important`,
             paddingLeft: `${adminSettings.leftBuffer}px`
           }}
         >
@@ -42,7 +42,8 @@ export default function SignaturePreview() {
               style={{
                 color: '#000000',
                 marginBottom: `${adminSettings.lineSpacing}px`,
-                fontWeight: adminSettings.fullNameWeight
+                fontWeight: adminSettings.fullNameWeight,
+                fontFamily: `${adminSettings.fontFamily} !important`
               }}
             >
               {formData.fullName}
@@ -55,7 +56,8 @@ export default function SignaturePreview() {
               style={{
                 color: 'rgba(0, 0, 0, 0.5)',
                 marginBottom: `${adminSettings.lineSpacing}px`,
-                fontWeight: adminSettings.positionWeight
+                fontWeight: adminSettings.positionWeight,
+                fontFamily: `${adminSettings.fontFamily} !important`
               }}
             >
               {formData.position}
@@ -68,7 +70,8 @@ export default function SignaturePreview() {
               style={{
                 color: 'rgba(0, 0, 0, 0.5)',
                 marginBottom: `${adminSettings.lineSpacing}px`,
-                fontWeight: adminSettings.contactWeight
+                fontWeight: adminSettings.contactWeight,
+                fontFamily: `${adminSettings.fontFamily} !important`
               }}
             >
               {contactLine()}
