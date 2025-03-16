@@ -20,7 +20,7 @@ export default function SignaturePreview() {
     return '';
   };
 
-  // Use the logo URL directly since we're now storing full URLs
+  // Use the logo URL directly
   const logoUrl = formData.selectedLogo || null;
 
   return (
