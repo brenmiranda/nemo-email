@@ -6,12 +6,20 @@ import { useSignature } from '../contexts/SignatureContext';
 export default function AdminPanel() {
   const { adminSettings, updateAdminSettings } = useSignature();
   const [newLogo, setNewLogo] = useState({ value: '', label: '' });
-  const [repoUrl, setRepoUrl] = useState(adminSettings.repoBaseUrl);
+  const [fontUrls, setFontUrls] = useState({
+    regular: adminSettings.fontUrls.regular,
+    medium: adminSettings.fontUrls.medium,
+    bold: adminSettings.fontUrls.bold,
+  });
 
   // Font weight options
   const fontWeightOptions = [
+    { value: 300, label: 'Light' },
     { value: 400, label: 'Regular' },
+    { value: 500, label: 'Medium' },
+    { value: 600, label: 'Semi Bold' },
     { value: 700, label: 'Bold' },
+    { value: 800, label: 'Extra Bold' }
   ];
 
   const handleNumberChange = (e) => {
@@ -24,9 +32,9 @@ export default function AdminPanel() {
     updateAdminSettings({ [name]: parseInt(value, 10) });
   };
 
-  const handleRepoUrlChange = () => {
-    updateAdminSettings({ repoBaseUrl: repoUrl });
-    alert('Repository URL updated!');
+  const handleFontUrlsUpdate = () => {
+    updateAdminSettings({ fontUrls });
+    alert('Font URLs updated!');
   };
 
   const handleLogoInputChange = (e) => {
@@ -137,29 +145,55 @@ export default function AdminPanel() {
         </div>
       </div>
 
-      {/* GitHub Repository Settings */}
+      {/* Font URL Settings */}
       <div className="admin-section">
-        <h3>GitHub Repository Settings</h3>
-        <div className="setting-group">
-          <div className="setting-item" style={{ flexBasis: '100%' }}>
-            <label htmlFor="repoBaseUrl">Repository Base URL</label>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <input
-                type="text"
-                id="repoBaseUrl"
-                value={repoUrl}
-                onChange={(e) => setRepoUrl(e.target.value)}
-                placeholder="https://raw.githubusercontent.com/username/repo/main"
-                style={{ flex: 1 }}
-              />
-              <button className="btn btn-secondary" onClick={handleRepoUrlChange}>
-                Update
-              </button>
-            </div>
-            <p style={{ fontSize: '12px', marginTop: '5px', color: '#666' }}>
-              e.g. https://raw.githubusercontent.com/username/repo/main
-            </p>
+        <h3>Font URL Settings</h3>
+        <div className="setting-group" style={{ flexDirection: 'column', gap: '15px' }}>
+          <div className="setting-item" style={{ width: '100%' }}>
+            <label htmlFor="regularFontUrl">Regular Font URL (400)</label>
+            <input
+              type="text"
+              id="regularFontUrl"
+              value={fontUrls.regular}
+              onChange={(e) => setFontUrls({...fontUrls, regular: e.target.value})}
+              placeholder="https://example.com/fonts/Regular.woff2"
+              style={{ width: '100%' }}
+            />
           </div>
+          
+          <div className="setting-item" style={{ width: '100%' }}>
+            <label htmlFor="mediumFontUrl">Medium Font URL (500)</label>
+            <input
+              type="text"
+              id="mediumFontUrl"
+              value={fontUrls.medium}
+              onChange={(e) => setFontUrls({...fontUrls, medium: e.target.value})}
+              placeholder="https://example.com/fonts/Medium.woff2"
+              style={{ width: '100%' }}
+            />
+          </div>
+          
+          <div className="setting-item" style={{ width: '100%' }}>
+            <label htmlFor="boldFontUrl">Bold Font URL (700)</label>
+            <input
+              type="text"
+              id="boldFontUrl"
+              value={fontUrls.bold}
+              onChange={(e) => setFontUrls({...fontUrls, bold: e.target.value})}
+              placeholder="https://example.com/fonts/Bold.woff2"
+              style={{ width: '100%' }}
+            />
+          </div>
+          
+          <div style={{ alignSelf: 'flex-start' }}>
+            <button className="btn btn-secondary" onClick={handleFontUrlsUpdate}>
+              Update Font URLs
+            </button>
+          </div>
+          
+          <p style={{ fontSize: '12px', color: '#666' }}>
+            Add direct URLs to your font files in WOFF2 format. The fonts will be loaded dynamically.
+          </p>
         </div>
       </div>
 
@@ -167,19 +201,19 @@ export default function AdminPanel() {
       <div className="admin-section">
         <h3>Logo Management</h3>
         <p style={{ marginBottom: '15px' }}>
-          Add the filenames of logos available in your GitHub repository.
+          Add direct URLs to your logo images.
         </p>
 
         <div className="setting-group">
           <div className="setting-item">
-            <label htmlFor="logoValue">Logo Filename</label>
+            <label htmlFor="logoValue">Logo URL</label>
             <input
               type="text"
               id="logoValue"
               name="value"
               value={newLogo.value}
               onChange={handleLogoInputChange}
-              placeholder="logo.png"
+              placeholder="https://example.com/logo.png"
             />
           </div>
 
