@@ -27,15 +27,17 @@ export const SignatureProvider = ({ children }) => {
     
     // Available logos
     logos: [
-      { value: 'logo1.png', label: 'Logo 1' },
-      { value: 'logo2.png', label: 'Logo 2' },
+      { value: 'https://github.com/brenmiranda/nemo-email/blob/main/logos/01%20-%20Steel%20&%20Black.png?raw=true', label: '01 - Steel & Black' },
+      { value: 'https://github.com/brenmiranda/nemo-email/blob/main/logos/02%20-%20Flat%20Logo%20&%20Black.png?raw=true', label: '02 - Flat Logo & Black' },
+      { value: 'https://github.com/brenmiranda/nemo-email/blob/main/logos/03%20-%20Flat%20Logo%20&%20White.png?raw=true', label: '03 - Flat Logo & White' },
+      { value: 'https://github.com/brenmiranda/nemo-email/blob/main/logos/04%20-%20Steel%20&%20White.png?raw=true', label: '04 - Steel & White' },
     ],
     
     // GitHub repo info for assets
-    repoBaseUrl: 'https://raw.githubusercontent.com/yourusername/your-repo/main',
+    repoBaseUrl: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/main',
     
     // Font family from GitHub
-    fontFamily: 'CustomFont, sans-serif',
+    fontFamily: 'Rena, sans-serif',
   });
 
   // Load admin settings from localStorage if available
