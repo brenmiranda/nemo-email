@@ -48,8 +48,11 @@ export default function SignaturePreview() {
               style={{
                 color: '#000000',
                 marginBottom: `${adminSettings.lineSpacing}px`,
-                fontFamily: `${getFontFamily(adminSettings.fullNameWeight)}, sans-serif !important`,
-                fontWeight: `${adminSettings.fullNameWeight} !important`,
+                fontFamily: 'CustomFontBold, sans-serif !important',
+                fontWeight: '700 !important',
+                // Force browser to recognize this as bold text
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale',
               }}
             >
               {formData.fullName}
