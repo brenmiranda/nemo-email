@@ -7,9 +7,9 @@ export default function AdminPanel() {
   const { adminSettings, updateAdminSettings } = useSignature();
   const [newLogo, setNewLogo] = useState({ value: '', label: '' });
   const [fontUrls, setFontUrls] = useState({
-    regular: adminSettings.fontUrls.regular,
-    medium: adminSettings.fontUrls.medium,
-    bold: adminSettings.fontUrls.bold,
+    regular: adminSettings.fontUrls?.regular || '',
+    medium: adminSettings.fontUrls?.medium || '',
+    bold: adminSettings.fontUrls?.bold || '',
   });
 
   // Font weight options
