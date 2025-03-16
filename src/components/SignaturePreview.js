@@ -20,10 +20,8 @@ export default function SignaturePreview() {
     return '';
   };
 
-  // Construct logo URL from the repo base URL and selected logo
-  const logoUrl = formData.selectedLogo 
-    ? `${adminSettings.repoBaseUrl}/logos/${formData.selectedLogo}`
-    : null;
+  // Use the logo URL directly since we're now storing full URLs
+  const logoUrl = formData.selectedLogo || null;
 
   return (
     <div className="preview-section">
