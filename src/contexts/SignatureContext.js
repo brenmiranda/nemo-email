@@ -2,6 +2,20 @@
 
 import { createContext, useState, useContext, useEffect } from 'react';
 
+// Pre-defined assets - replace these URLs with your actual font and logo URLs
+const FONTS = {
+  regular: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.ttf',
+  medium: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.ttf',
+  bold: 'https://github.com/brenmiranda/nemo-email/raw/refs/heads/main/fonts/RenaVF-pre-redraw.ttf',
+};
+
+const LOGOS = [
+  { value: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/refs/heads/main/logos/01%20-%20Steel%20%26%20Black.png', label: 'Primary Logo' },
+  { value: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/refs/heads/main/logos/02%20-%20Flat%20Logo%20%26%20Black.png', label: 'Secondary Logo' },
+  { value: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/refs/heads/main/logos/03%20-%20Flat%20Logo%20%26%20White.png', label: 'White on White' },
+  { value: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/refs/heads/main/logos/04%20-%20Steel%20%26%20White.png', label: 'Steel on White' },
+];
+
 const SignatureContext = createContext();
 
 export const SignatureProvider = ({ children }) => {
@@ -25,29 +39,24 @@ export const SignatureProvider = ({ children }) => {
     lineSpacing: 26,
     leftBuffer: 14,
     
-    // Available logos (using direct URLs)
-    logos: [
-      { value: 'https://example.com/logo1.png', label: 'Logo 1' },
-      { value: 'https://example.com/logo2.png', label: 'Logo 2' },
-    ],
-    
-    // Font settings (direct URLs for each weight)
+    // Pre-defined assets
     fontFamily: 'CustomFont, sans-serif',
-    fontUrls: {
-      regular: '',
-      medium: '',
-      bold: '',
-    },
-    
-    // Use direct URLs instead of GitHub repo
-    useDirectUrls: true,
+    fontUrls: FONTS,
+    logos: LOGOS,
   });
 
   // Load admin settings from localStorage if available
   useEffect(() => {
     const savedSettings = localStorage.getItem('signatureAdminSettings');
     if (savedSettings) {
-      setAdminSettings(JSON.parse(savedSettings));
+      // Merge saved settings with pre-defined assets
+      const parsedSettings = JSON.parse(savedSettings);
+      setAdminSettings({
+        ...parsedSettings,
+        // Always use the pre-defined assets
+        fontUrls: FONTS,
+        logos: LOGOS,
+      });
     }
   }, []);
 
