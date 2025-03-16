@@ -23,6 +23,13 @@ export default function SignaturePreview() {
   // Use the logo URL directly
   const logoUrl = formData.selectedLogo || null;
 
+  // Helper function to determine the correct font family based on weight
+  const getFontFamily = (weight) => {
+    if (weight >= 700) return 'CustomFontBold';
+    if (weight >= 500) return 'CustomFontMedium';
+    return 'CustomFontRegular';
+  };
+
   return (
     <div className="preview-section">
       <h2>Signature Preview</h2>
@@ -32,23 +39,17 @@ export default function SignaturePreview() {
           ref={signatureRef}
           className="signature-wrapper"
           style={{
-            fontFamily: `CustomFont, sans-serif !important`,
             paddingLeft: `${adminSettings.leftBuffer}px`,
-            WebkitFontSmoothing: 'antialiased',
-            MozOsxFontSmoothing: 'grayscale',
-            textRendering: 'optimizeLegibility'
           }}
         >
           {/* Full Name */}
           {formData.fullName && (
-            <div 
+            <div className="name-text"
               style={{
                 color: '#000000',
                 marginBottom: `${adminSettings.lineSpacing}px`,
-                fontWeight: adminSettings.fullNameWeight,
-                fontFamily: `CustomFont, sans-serif !important`,
-                fontVariationSettings: `'wght' ${adminSettings.fullNameWeight}`,
-                letterSpacing: '0.01em'
+                fontFamily: `${getFontFamily(adminSettings.fullNameWeight)}, sans-serif !important`,
+                fontWeight: `${adminSettings.fullNameWeight} !important`,
               }}
             >
               {formData.fullName}
@@ -57,14 +58,12 @@ export default function SignaturePreview() {
           
           {/* Position */}
           {formData.position && (
-            <div 
+            <div className="position-text"
               style={{
                 color: 'rgba(0, 0, 0, 0.5)',
                 marginBottom: `${adminSettings.lineSpacing}px`,
-                fontWeight: adminSettings.positionWeight,
-                fontFamily: `CustomFont, sans-serif !important`,
-                fontVariationSettings: `'wght' ${adminSettings.positionWeight}`,
-                letterSpacing: '0.01em'
+                fontFamily: `${getFontFamily(adminSettings.positionWeight)}, sans-serif !important`,
+                fontWeight: `${adminSettings.positionWeight} !important`,
               }}
             >
               {formData.position}
@@ -73,14 +72,12 @@ export default function SignaturePreview() {
           
           {/* Contact Line (Phone | Email) */}
           {contactLine() && (
-            <div 
+            <div className="contact-text"
               style={{
                 color: 'rgba(0, 0, 0, 0.5)',
                 marginBottom: `${adminSettings.lineSpacing}px`,
-                fontWeight: adminSettings.contactWeight,
-                fontFamily: `CustomFont, sans-serif !important`,
-                fontVariationSettings: `'wght' ${adminSettings.contactWeight}`,
-                letterSpacing: '0.01em'
+                fontFamily: `${getFontFamily(adminSettings.contactWeight)}, sans-serif !important`,
+                fontWeight: `${adminSettings.contactWeight} !important`,
               }}
             >
               {contactLine()}
