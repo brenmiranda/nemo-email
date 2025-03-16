@@ -13,14 +13,6 @@
 }
 
 @font-face {
-  font-family: 'CustomFontMedium';
-  src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2') format('woff2');
-  font-weight: 500 !important;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: 'CustomFontBold';
   src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/RenaVF-pre-redraw.woff2') format('woff2');
   font-weight: 700 !important;
