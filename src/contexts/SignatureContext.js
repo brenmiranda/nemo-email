@@ -37,7 +37,7 @@ export const SignatureProvider = ({ children }) => {
     repoBaseUrl: 'https://raw.githubusercontent.com/brenmiranda/nemo-email/main',
     
     // Font family from GitHub
-    fontFamily: 'Rena, sans-serif',
+    fontFamily: 'RenaRegular, RenaBold, sans-serif',
   });
 
   // Load admin settings from localStorage if available
