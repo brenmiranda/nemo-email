@@ -10,12 +10,8 @@ export default function AdminPanel() {
 
   // Font weight options
   const fontWeightOptions = [
-    { value: 300, label: 'Light' },
     { value: 400, label: 'Regular' },
-    { value: 500, label: 'Medium' },
-    { value: 600, label: 'Semi Bold' },
     { value: 700, label: 'Bold' },
-    { value: 800, label: 'Extra Bold' }
   ];
 
   const handleNumberChange = (e) => {
