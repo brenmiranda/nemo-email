@@ -24,12 +24,14 @@ export default function SignaturePreview() {
     );
   };
   
-  // Construct the contact line if both phone and email are provided
+  // Construct the contact line with consistent spacing
   const contactLine = () => {
     if (formData.phoneNumber && formData.email) {
       return (
         <>
-          {formData.phoneNumber} | {formatEmail(formData.email)}
+          {formData.phoneNumber}
+          <span style={{ margin: '0 0.4em' }}>|</span>
+          {formatEmail(formData.email)}
         </>
       );
     } else if (formData.phoneNumber) {
@@ -43,6 +45,9 @@ export default function SignaturePreview() {
   // Use the logo URL directly
   const logoUrl = formData.selectedLogo || null;
 
+  // Get letter spacing from admin settings or use default
+  const letterSpacing = adminSettings.letterSpacing || "-0.02em";
+
   return (
     <div className="preview-section">
       <h2>Signature Preview</h2>
@@ -53,6 +58,7 @@ export default function SignaturePreview() {
           className="signature-wrapper"
           style={{
             paddingLeft: `${adminSettings.leftBuffer}px`,
+            letterSpacing: letterSpacing,
           }}
         >
           {/* Full Name */}
@@ -61,6 +67,7 @@ export default function SignaturePreview() {
               style={{
                 color: '#000000',
                 marginBottom: `${adminSettings.lineSpacing}px`,
+                letterSpacing: letterSpacing,
               }}
             >
               {formData.fullName}
@@ -73,6 +80,7 @@ export default function SignaturePreview() {
               style={{
                 color: 'rgba(0, 0, 0, 0.5)',
                 marginBottom: `${adminSettings.lineSpacing}px`,
+                letterSpacing: letterSpacing,
               }}
             >
               {formData.position}
@@ -85,6 +93,7 @@ export default function SignaturePreview() {
               style={{
                 color: 'rgba(0, 0, 0, 0.5)',
                 marginBottom: `${adminSettings.lineSpacing}px`,
+                letterSpacing: letterSpacing,
               }}
             >
               {contactLine()}
