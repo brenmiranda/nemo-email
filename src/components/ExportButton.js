@@ -1,12 +1,14 @@
+// I tried html2canvas, but it didn't want to respect the variable rendering of Rena.
+
 'use client';
 
 import { useState } from 'react';
-import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image';
 import { useSignature } from '../contexts/SignatureContext';
 
 export default function ExportButton({ signatureRef }) {
   const [exporting, setExporting] = useState(false);
-  const { formData, adminSettings } = useSignature();
+  const { formData } = useSignature();
   
   const exportAsPNG = async () => {
     if (!signatureRef.current) return;
@@ -38,16 +40,14 @@ export default function ExportButton({ signatureRef }) {
       }
       
       // Apply explicit styles directly to the original elements before capture
-      // This helps html2canvas to see the correct styles
       if (elements.name) {
         elements.name.style.cssText = `
           font-family: 'CustomFontBold', -apple-system, BlinkMacSystemFont, sans-serif !important;
           font-variation-settings: "opsz" 144, "wght" 700 !important;
-          letter-spacing: ${adminSettings.letterSpacing || "0.01em"} !important;
-          color: #000000 !important;
-          margin-bottom: ${adminSettings.lineSpacing}px !important;
+          font-weight: 700 !important;
           -webkit-font-smoothing: antialiased !important;
           -moz-osx-font-smoothing: grayscale !important;
+          text-rendering: optimizeLegibility !important;
         `;
       }
       
@@ -55,11 +55,10 @@ export default function ExportButton({ signatureRef }) {
         elements.position.style.cssText = `
           font-family: 'CustomFont', -apple-system, BlinkMacSystemFont, sans-serif !important;
           font-variation-settings: "opsz" 144, "wght" 400 !important;
-          letter-spacing: ${adminSettings.letterSpacing || "0.01em"} !important;
-          color: rgba(0, 0, 0, 0.5) !important;
-          margin-bottom: ${adminSettings.lineSpacing}px !important;
+          font-weight: 400 !important;
           -webkit-font-smoothing: antialiased !important;
           -moz-osx-font-smoothing: grayscale !important;
+          text-rendering: optimizeLegibility !important;
         `;
       }
       
@@ -67,11 +66,10 @@ export default function ExportButton({ signatureRef }) {
         elements.contact.style.cssText = `
           font-family: 'CustomFont', -apple-system, BlinkMacSystemFont, sans-serif !important;
           font-variation-settings: "opsz" 144, "wght" 400 !important;
-          letter-spacing: ${adminSettings.letterSpacing || "0.01em"} !important;
-          color: rgba(0, 0, 0, 0.5) !important;
-          margin-bottom: ${adminSettings.lineSpacing}px !important;
+          font-weight: 400 !important;
           -webkit-font-smoothing: antialiased !important;
           -moz-osx-font-smoothing: grayscale !important;
+          text-rendering: optimizeLegibility !important;
         `;
       }
       
@@ -80,22 +78,25 @@ export default function ExportButton({ signatureRef }) {
           symbol.style.cssText = `
             font-family: 'AtSymbolFont', Arial, sans-serif !important;
             font-weight: bold !important;
-            letter-spacing: -0.04em !important;
-            font-size: 1em !important;
+            -webkit-font-smoothing: antialiased !important;
+            -moz-osx-font-smoothing: grayscale !important;
+            text-rendering: optimizeLegibility !important;
           `;
         });
       }
       
-      // Wait for a moment to make sure styles are applied
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Wait for font rendering
+      await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Now capture the signature with the directly applied styles
-      const canvas = await html2canvas(signatureRef.current, {
-        backgroundColor: null,
-        scale: 4,
-        logging: true,
-        useCORS: true,
-        allowTaint: true,
+      // Use dom-to-image instead of html2canvas
+      const dataUrl = await domtoimage.toPng(signatureRef.current, {
+        quality: 1.0,
+        bgcolor: null, // Transparent background
+        scale: 4,      // Higher resolution
+        style: {
+          'transform': 'scale(4)',
+          'transform-origin': 'top left'
+        }
       });
       
       // Create download link
@@ -105,7 +106,7 @@ export default function ExportButton({ signatureRef }) {
         : 'email-signature.png';
       
       link.download = filename;
-      link.href = canvas.toDataURL('image/png', 1.0);
+      link.href = dataUrl;
       
       // Trigger download
       document.body.appendChild(link);
