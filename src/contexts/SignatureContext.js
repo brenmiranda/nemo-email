@@ -36,7 +36,7 @@ export const SignatureProvider = ({ children }) => {
     contactWeight: 400,
     
     // Spacing (in pixels)
-    lineSpacing: 26,
+    lineSpacing: 0,
     leftBuffer: 14,
     
     // Pre-defined assets
