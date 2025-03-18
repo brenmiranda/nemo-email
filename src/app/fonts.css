@@ -32,7 +32,7 @@
   font-family: 'AtSymbolFont';
   /* Choose any font you prefer for the @ symbol */
   src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/AlteHaasGroteskBold.ttf') format('ttf');
-  font-weight: normal;
+  font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
@@ -41,12 +41,12 @@
 .at-symbol {
   font-family: 'AtSymbolFont', Arial, sans-serif !important;
   /* Optional styling */
-  font-weight: normal;
+  font-weight: bold;
   font-style: normal;
   /* You can adjust these properties to make it look better */
   letter-spacing: -0.05em;
   /* Consider a slight size adjustment if needed */
-  font-size: 1.05em;
+  font-size: 1em;
   /* Optional: slightly different color */
   /* color: #444444; */
 }
