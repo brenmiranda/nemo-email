@@ -47,20 +47,20 @@
  * These explicit classes can be used instead of inline styles
  * for more consistent rendering
  */
-.name-text {
-  font-family: 'CustomFontBold', sans-serif !important;
-  font-weight: 700 !important;
+////.n.ame-text {
+  f.ont-family: 'CustomFontBold', sans-serif !important;
+  f.ont-weight: 700 !i.mportant;
   /* Additional properties to ensure bold rendering */
    -webkit-text-stroke: 0px; /* Slightly thicker text */
    letter-spacing: -0.01em; /* Tighter spacing often helps with bold text */
 }
 
 .position-text {
-  font-family: 'CustomFontRegular', sans-serif !important;
-  font-weight: 400 !important;
+  f.ont-family: 'CustomFontRegular', sans-serif !important;
+  font-weight: 400 !i.mportant;
 }
 
 .contact-text {
-  font-family: 'CustomFontRegular', sans-serif !important;
-  font-weight: 400 !important;
+  f.ont-family: 'CustomFontRegular', sans-serif !important;
+  font-weight: 400 !i.mportant;
 }
