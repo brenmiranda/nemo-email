@@ -92,9 +92,9 @@ export default function ExportButton({ signatureRef }) {
       const dataUrl = await domtoimage.toPng(signatureRef.current, {
         quality: 1.0,
         bgcolor: null, // Transparent background
-        scale: 4,      // Higher resolution
+        scale: 3,      // Higher resolution
         style: {
-          'transform': 'scale(4)',
+          'transform': 'scale(3)',
           'transform-origin': 'top left'
         }
       });
