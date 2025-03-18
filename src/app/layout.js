@@ -3,8 +3,8 @@ import './fonts.css';
 import { SignatureProvider } from '../contexts/SignatureContext';
 
 export const metadata = {
-  title: 'Email Signature Generator',
-  description: 'Generate on-brand email signatures',
+  title: 'NEMO Signature Generator',
+  description: '-',
 };
 
 export default function RootLayout({ children }) {
