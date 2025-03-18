@@ -51,24 +51,24 @@ export default function SignatureForm() {
           name="phoneNumber"
           value={formData.phoneNumber}
           onChange={handleInputChange}
-          placeholder="+1 (555) 123-4567"
+          placeholder="555.123.4567"
         />
       </div>
 
       <div className="form-group">
-        <label htmlFor="email">Email Address</label>
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
           name="email"
           value={formData.email}
           onChange={handleInputChange}
-          placeholder="john.doe@company.com"
+          placeholder="jdoe@nemoind.com"
         />
       </div>
 
       <div className="form-group">
-        <label htmlFor="selectedLogo">Company Logo</label>
+        <label htmlFor="selectedLogo">NEMO Logos</label>
         <Select
           id="selectedLogo"
           options={adminSettings.logos}
