@@ -2,6 +2,7 @@
 @font-face {
   font-family: 'CustomFont';
   src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/Rena.woff2') format('woff2');
+  font-optical-spacing: 100%;
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -11,6 +12,7 @@
 @font-face {
   font-family: 'CustomFontBold';
   src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/Rena.woff2') format('woff2');
+  font-optical-spacing: 100%;
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -20,10 +22,12 @@
 /* Font styling for signature components */
 .signature-wrapper {
   font-family: 'CustomFont', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-optical-spacing: 100%;
 }
 
 .name-text {
   font-family: 'CustomFontBold', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-optical-spacing: 100%;
   font-weight: 700;
 }
 
