@@ -6,14 +6,7 @@ import { useSignature } from '../contexts/SignatureContext';
 
 export default function ExportButton({ signatureRef }) {
   const [exporting, setExporting] = useState(false);
-  const { formData, adminSettings } = useSignature();
-  
-  // Helper function to determine font family based on weight
-  const getFontFamily = (weight) => {
-    if (weight >= 700) return 'CustomFontBold';
-    if (weight >= 500) return 'CustomFontMedium';
-    return 'CustomFontRegular';
-  };
+  const { formData } = useSignature();
   
   const exportAsPNG = async () => {
     if (!signatureRef.current) return;
@@ -21,7 +14,7 @@ export default function ExportButton({ signatureRef }) {
     setExporting(true);
     
     try {
-      // Before export, we need to ensure all fonts are fully loaded
+      // Before export, ensure all fonts are loaded
       if (document.fonts && document.fonts.ready) {
         await document.fonts.ready;
       }
@@ -34,31 +27,17 @@ export default function ExportButton({ signatureRef }) {
         useCORS: true, // Enable CORS for external images
         allowTaint: true,
         onclone: (clonedDoc) => {
-          // Get all the signature elements
-          const fullNameEl = clonedDoc.querySelector('.name-text');
-          const positionEl = clonedDoc.querySelector('.position-text');
-          const contactEl = clonedDoc.querySelector('.contact-text');
+          // Make sure @ symbol styling is preserved
+          const atSymbols = clonedDoc.querySelectorAll('.at-symbol');
+          atSymbols.forEach(symbol => {
+            // Reinforce the styling in the cloned document
+            symbol.style.fontFamily = 'AtSymbolFont, Arial, sans-serif';
+            symbol.style.letterSpacing = '0.02em';
+            symbol.style.fontSize = '1.05em';
+            // Add any other styles you want to reinforce
+          });
           
-          // Apply specific styles to ensure consistent appearance
-          if (fullNameEl) {
-            const fontFamily = getFontFamily(adminSettings.fullNameWeight);
-            fullNameEl.style.fontFamily = `${fontFamily}, sans-serif !important`;
-            fullNameEl.style.fontWeight = `${adminSettings.fullNameWeight} !important`;
-          }
-          
-          if (positionEl) {
-            const fontFamily = getFontFamily(adminSettings.positionWeight);
-            positionEl.style.fontFamily = `${fontFamily}, sans-serif !important`;
-            positionEl.style.fontWeight = `${adminSettings.positionWeight} !important`;
-          }
-          
-          if (contactEl) {
-            const fontFamily = getFontFamily(adminSettings.contactWeight);
-            contactEl.style.fontFamily = `${fontFamily}, sans-serif !important`;
-            contactEl.style.fontWeight = `${adminSettings.contactWeight} !important`;
-          }
-          
-          // Apply additional rendering styles to all elements
+          // Apply additional styling if needed
           const allElements = clonedDoc.querySelectorAll('.signature-wrapper *');
           allElements.forEach(el => {
             if (el.style) {
