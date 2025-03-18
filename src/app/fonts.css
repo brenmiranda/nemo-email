@@ -24,3 +24,27 @@
   font-family: 'CustomFontBold', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: bold;
 }
+
+/* Add a different font for the @ symbol */
+@font-face {
+  font-family: 'AtSymbolFont';
+  /* Choose any font you prefer for the @ symbol */
+  src: url('https://fonts.gstatic.com/s/opensans/v35/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Style for the @ symbol */
+.at-symbol {
+  font-family: 'AtSymbolFont', Arial, sans-serif !important;
+  /* Optional styling */
+  font-weight: normal;
+  font-style: normal;
+  /* You can adjust these properties to make it look better */
+  letter-spacing: 0.02em;
+  /* Consider a slight size adjustment if needed */
+  font-size: 1.05em;
+  /* Optional: slightly different color */
+  /* color: #444444; */
+}
