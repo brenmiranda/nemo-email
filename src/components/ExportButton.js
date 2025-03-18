@@ -61,11 +61,10 @@ export default function ExportButton({ signatureRef }) {
           font-family: 'CustomFont', -apple-system, BlinkMacSystemFont, sans-serif !important;
           font-variation-settings: "opsz" 144, "wght" 400 !important;
           font-weight: 400 !important;
-          color: rgba(0, 0, 0, 0.5) !important;
+          color: rgb(128, 128, 128) !important;
           -webkit-font-smoothing: antialiased !important;
           -moz-osx-font-smoothing: grayscale !important;
           text-rendering: optimizeLegibility !important;
-          opacity: 0.5 !important;
         `;
       }
       
@@ -75,11 +74,10 @@ export default function ExportButton({ signatureRef }) {
           font-family: 'CustomFont', -apple-system, BlinkMacSystemFont, sans-serif !important;
           font-variation-settings: "opsz" 144, "wght" 400 !important;
           font-weight: 400 !important;
-          color: rgba(0, 0, 0, 0.5) !important;
+          color: rgb(128, 128, 128) !important;
           -webkit-font-smoothing: antialiased !important;
           -moz-osx-font-smoothing: grayscale !important;
           text-rendering: optimizeLegibility !important;
-          opacity: 0.5 !important;
         `;
       }
       
