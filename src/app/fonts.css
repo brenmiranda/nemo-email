@@ -29,7 +29,7 @@
 @font-face {
   font-family: 'AtSymbolFont';
   /* Choose any font you prefer for the @ symbol */
-  src: url('https://fonts.gstatic.com/s/opensans/v35/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/AlteHaasGroteskBold.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
