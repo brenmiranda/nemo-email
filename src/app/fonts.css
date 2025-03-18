@@ -24,7 +24,7 @@
 
 .name-text {
   font-family: 'CustomFontBold', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 /* Add a different font for the @ symbol */
