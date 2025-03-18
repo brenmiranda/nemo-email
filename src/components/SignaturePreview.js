@@ -46,7 +46,7 @@ export default function SignaturePreview() {
   const logoUrl = formData.selectedLogo || null;
 
   // Get letter spacing from admin settings or use default
-  const letterSpacing = adminSettings.letterSpacing || "-0.02em";
+  const letterSpacing = adminSettings.letterSpacing || "0.01em";
 
   return (
     <div className="preview-section">
