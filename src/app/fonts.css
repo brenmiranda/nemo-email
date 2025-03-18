@@ -14,7 +14,7 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.06em;
 }
 
 /* Font styling for signature components */
@@ -44,7 +44,7 @@
   font-weight: normal;
   font-style: normal;
   /* You can adjust these properties to make it look better */
-  letter-spacing: 0.02em;
+  letter-spacing: -0.05em;
   /* Consider a slight size adjustment if needed */
   font-size: 1.05em;
   /* Optional: slightly different color */
