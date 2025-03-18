@@ -7,7 +7,7 @@
 @font-face {
   font-family: 'CustomFontRegular';
   src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/Rena.woff2') format('woff2');
-  font-weight: 400 !important;
+  font-variation-settings: "opsz" 144, "wght" 400;
   font-style: normal;
   font-display: swap;
 }
@@ -15,7 +15,7 @@
 @font-face {
   font-family: 'CustomFontMedium';
   src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/Rena.woff2') format('woff2');
-  font-weight: 500 !important;
+  font-variation-settings: "opsz" 144, "wght" 500;
   font-style: normal;
   font-display: swap;
 }
@@ -23,7 +23,7 @@
 @font-face {
   font-family: 'CustomFontBold';
   src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/Rena.woff2') format('woff2');
-  font-weight: 700 !important;
+  font-variation-settings: "opsz" 144, "wght" 700;
   font-style: normal;
   font-display: swap;
   font-variation-settings: 'wght' 700; /* Explicitly set the weight variation */
@@ -49,7 +49,7 @@
  */
 .name-text {
   font-family: 'CustomFontBold', sans-serif !important;
-  font-weight: 700;
+  font-variation-settings: "opsz" 144, "wght" 400;
   /* Additional properties to ensure bold rendering */
    -webkit-text-stroke: 0px; /* Slightly thicker text */
    letter-spacing: -0.01em; /* Tighter spacing often helps with bold text */
