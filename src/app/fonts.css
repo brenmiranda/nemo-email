@@ -5,6 +5,7 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  letter-spacing: -0.03em;
 }
 
 @font-face {
@@ -13,6 +14,7 @@
   font-weight: bold;
   font-style: normal;
   font-display: swap;
+  letter-spacing: -0.03em;
 }
 
 /* Font styling for signature components */
