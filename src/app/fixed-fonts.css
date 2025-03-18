@@ -52,7 +52,7 @@
   font-variation-settings: "opsz" 144, "wght" 400;
   /* Additional properties to ensure bold rendering */
    -webkit-text-stroke: 0px; /* Slightly thicker text */
-   letter-spacing: -0.01em; /* Tighter spacing often helps with bold text */
+   letter-spacing: 0.01em; /* Tighter spacing often helps with bold text */
 }
 
 .position-text {
