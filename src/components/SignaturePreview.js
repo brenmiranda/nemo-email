@@ -78,7 +78,7 @@ export default function SignaturePreview() {
           {formData.position && (
             <div className="position-text"
               style={{
-                color: 'rgba(0, 0, 0, 0.5)',
+                color: '#808080',
                 marginBottom: `${adminSettings.lineSpacing}px`,
                 letterSpacing: letterSpacing,
               }}
@@ -91,7 +91,7 @@ export default function SignaturePreview() {
           {contactLine() && (
             <div className="contact-text"
               style={{
-                color: 'rgba(0, 0, 0, 0.5)',
+                color: '#808080',
                 marginBottom: `${adminSettings.lineSpacing}px`,
                 letterSpacing: letterSpacing,
               }}
