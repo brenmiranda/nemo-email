@@ -22,7 +22,7 @@
 
 @font-face {
   font-family: 'CustomFontBold';
-  src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/Rena.woff2') format('woff2-variations');
+  src: url('https://cdn.jsdelivr.net/gh/brenmiranda/nemo-email@main/fonts/Rena.woff2') format('woff2');
   font-weight: 700 !important;
   font-style: normal;
   font-display: swap;
