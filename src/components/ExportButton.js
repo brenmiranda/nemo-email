@@ -14,90 +14,78 @@ export default function ExportButton({ signatureRef }) {
     setExporting(true);
     
     try {
-      // Store original styles to restore later
-      const originalStyles = {};
-      const elements = {
-        wrapper: signatureRef.current,
-        name: signatureRef.current.querySelector('.name-text'),
-        position: signatureRef.current.querySelector('.position-text'),
-        contact: signatureRef.current.querySelector('.contact-text'),
-        atSymbols: Array.from(signatureRef.current.querySelectorAll('.at-symbol'))
-      };
+      // Clone the signature to modify for export
+      const clone = signatureRef.current.cloneNode(true);
       
-      // Save original styles and dimensions
-      const originalPosition = signatureRef.current.style.position;
-      const originalWidth = signatureRef.current.style.width;
-      const originalHeight = signatureRef.current.style.height;
-      const originalPadding = signatureRef.current.style.padding;
-      const originalMargin = signatureRef.current.style.margin;
-      const originalDisplay = signatureRef.current.style.display;
-      const originalPaddingLeft = signatureRef.current.style.paddingLeft;
-      
-      // Save element styles
-      for (const [key, element] of Object.entries(elements)) {
-        if (!element || (Array.isArray(element) && element.length === 0)) continue;
-        
-        if (Array.isArray(element)) {
-          originalStyles[key] = element.map(el => ({ 
-            cssText: el.style.cssText 
-          }));
-        } else {
-          originalStyles[key] = { cssText: element.style.cssText };
-        }
-      }
-      
-      // Get the current computed dimensions
-      const rect = signatureRef.current.getBoundingClientRect();
-      const computedWidth = rect.width;
-      const computedHeight = rect.height;
-      
-      // Important: Get the left buffer from settings or use default 14px
+      // Get the left buffer
       const leftBuffer = adminSettings?.leftBuffer || 14;
       
-      // Prepare the element for capture - IMPORTANT: preserve the left buffer
-      signatureRef.current.style.width = `${computedWidth}px`;
-      signatureRef.current.style.height = `${computedHeight}px`;
-      signatureRef.current.style.padding = '0';
-      signatureRef.current.style.paddingLeft = `${leftBuffer}px`; // Preserve left buffer
-      signatureRef.current.style.margin = '0';
-      signatureRef.current.style.display = 'inline-block';
+      // Style the clone for capture
+      clone.style.position = 'fixed';
+      clone.style.top = '0';
+      clone.style.left = '0';
+      clone.style.zIndex = '-9999';
+      clone.style.backgroundColor = 'transparent';
+      clone.style.padding = '0';
+      clone.style.paddingLeft = `${leftBuffer}px`;
+      clone.style.margin = '0';
+      clone.style.width = 'auto';
+      clone.style.height = 'auto';
+      clone.style.display = 'inline-block';
       
-      // Apply explicit styles directly to the original elements before capture
-      if (elements.name) {
-        elements.name.style.cssText = `
+      // Add to document body
+      document.body.appendChild(clone);
+      
+      // Get elements from the clone
+      const nameElement = clone.querySelector('.name-text');
+      const positionElement = clone.querySelector('.position-text');
+      const contactElement = clone.querySelector('.contact-text');
+      const atSymbols = clone.querySelectorAll('.at-symbol');
+      
+      // Apply styling to name element (100% opacity)
+      if (nameElement) {
+        nameElement.style.cssText = `
           font-family: 'CustomFontBold', -apple-system, BlinkMacSystemFont, sans-serif !important;
           font-variation-settings: "opsz" 144, "wght" 700 !important;
           font-weight: 700 !important;
+          color: rgb(0, 0, 0) !important;
           -webkit-font-smoothing: antialiased !important;
           -moz-osx-font-smoothing: grayscale !important;
           text-rendering: optimizeLegibility !important;
         `;
       }
       
-      if (elements.position) {
-        elements.position.style.cssText = `
+      // Apply styling to position element with 50% opacity
+      if (positionElement) {
+        positionElement.style.cssText = `
           font-family: 'CustomFont', -apple-system, BlinkMacSystemFont, sans-serif !important;
           font-variation-settings: "opsz" 144, "wght" 400 !important;
           font-weight: 400 !important;
+          color: rgba(0, 0, 0, 0.5) !important;
           -webkit-font-smoothing: antialiased !important;
           -moz-osx-font-smoothing: grayscale !important;
           text-rendering: optimizeLegibility !important;
+          opacity: 0.5 !important;
         `;
       }
       
-      if (elements.contact) {
-        elements.contact.style.cssText = `
+      // Apply styling to contact element with 50% opacity
+      if (contactElement) {
+        contactElement.style.cssText = `
           font-family: 'CustomFont', -apple-system, BlinkMacSystemFont, sans-serif !important;
           font-variation-settings: "opsz" 144, "wght" 400 !important;
           font-weight: 400 !important;
+          color: rgba(0, 0, 0, 0.5) !important;
           -webkit-font-smoothing: antialiased !important;
           -moz-osx-font-smoothing: grayscale !important;
           text-rendering: optimizeLegibility !important;
+          opacity: 0.5 !important;
         `;
       }
       
-      if (elements.atSymbols.length > 0) {
-        elements.atSymbols.forEach(symbol => {
+      // Apply styling to @ symbols
+      if (atSymbols.length > 0) {
+        atSymbols.forEach(symbol => {
           symbol.style.cssText = `
             font-family: 'AtSymbolFont', Arial, sans-serif !important;
             font-weight: bold !important;
@@ -108,43 +96,68 @@ export default function ExportButton({ signatureRef }) {
         });
       }
       
-      // Wait for font rendering and layout to stabilize
+      // Ensure separator spacing and styling
+      const separators = clone.querySelectorAll('span[style*="margin"]');
+      separators.forEach(sep => {
+        sep.style.margin = '0 0.4em';
+        sep.style.color = 'rgba(0, 0, 0, 0.5)';
+        sep.style.opacity = '0.5';
+      });
+      
+      // Wait for font rendering and layout
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Use dom-to-image with specific options to capture the full element
-      const dataUrl = await domtoimage.toPng(signatureRef.current, {
-        quality: 1.0,
-        bgcolor: null, // Transparent background
+      // Get computed dimensions after adding to DOM
+      const rect = clone.getBoundingClientRect();
+      const computedWidth = rect.width;
+      const computedHeight = rect.height;
+      
+      // Set explicit dimensions
+      clone.style.width = `${computedWidth}px`;
+      clone.style.height = `${computedHeight}px`;
+      
+      // Use higher quality settings for dom-to-image
+      const scale = 4; // Higher scale for better quality
+      
+      // Use SVG as intermediate format for better quality
+      const svgDataUrl = await domtoimage.toSvg(clone, {
         width: computedWidth,
         height: computedHeight,
         style: {
-          'transform': 'none',  // Disable any transforms during capture
-          'padding-left': `${leftBuffer}px`, // Ensure left buffer is applied
+          'transform': 'scale(1)',
+          'transform-origin': 'top left',
+          'padding-left': `${leftBuffer}px`,
+          'background-color': 'transparent'
         },
-        filter: (node) => {
-          // Make sure we capture everything, including pseudo elements
-          return true;
-        }
+        quality: 1.0,
+        cacheBust: true // Prevent caching issues
       });
       
-      // Create a new image to render at higher resolution
+      // Remove the clone from DOM
+      document.body.removeChild(clone);
+      
+      // Convert SVG to high-res PNG
       const img = new Image();
       img.onload = function() {
-        // Create a canvas with higher resolution
+        // Create a high-resolution canvas with 4x scaling
         const canvas = document.createElement('canvas');
-        canvas.width = computedWidth * 3;
-        canvas.height = computedHeight * 3;
+        canvas.width = computedWidth * scale;
+        canvas.height = computedHeight * scale;
         const ctx = canvas.getContext('2d');
+        
+        // Enable image smoothing for better quality
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
         
         // Clear canvas with transparent background
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
         // Draw the image at higher resolution
-        ctx.scale(3, 3);
+        ctx.scale(scale, scale);
         ctx.drawImage(img, 0, 0);
         
-        // Convert to PNG and download
-        const highResUrl = canvas.toDataURL('image/png', 1.0);
+        // Convert to high-quality PNG
+        const highResPngUrl = canvas.toDataURL('image/png', 1.0);
         
         // Create download link
         const link = document.createElement('a');
@@ -153,51 +166,23 @@ export default function ExportButton({ signatureRef }) {
           : 'email-signature.png';
         
         link.download = filename;
-        link.href = highResUrl;
+        link.href = highResPngUrl;
         
         // Trigger download
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         
-        // Restore original styles
-        signatureRef.current.style.position = originalPosition;
-        signatureRef.current.style.width = originalWidth;
-        signatureRef.current.style.height = originalHeight;
-        signatureRef.current.style.padding = originalPadding;
-        signatureRef.current.style.margin = originalMargin;
-        signatureRef.current.style.display = originalDisplay;
-        signatureRef.current.style.paddingLeft = originalPaddingLeft;
-        
-        for (const [key, element] of Object.entries(elements)) {
-          if (!element || (Array.isArray(element) && element.length === 0)) continue;
-          
-          if (Array.isArray(element)) {
-            element.forEach((el, index) => {
-              el.style.cssText = originalStyles[key][index].cssText;
-            });
-          } else {
-            element.style.cssText = originalStyles[key].cssText;
-          }
-        }
-        
         setExporting(false);
       };
       
       img.onerror = function() {
-        console.error('Error loading image');
+        console.error('Error loading SVG image');
         setExporting(false);
-        // Restore original styles
-        signatureRef.current.style.position = originalPosition;
-        signatureRef.current.style.width = originalWidth;
-        signatureRef.current.style.height = originalHeight;
-        signatureRef.current.style.padding = originalPadding;
-        signatureRef.current.style.margin = originalMargin;
-        signatureRef.current.style.display = originalDisplay;
-        signatureRef.current.style.paddingLeft = originalPaddingLeft;
       };
       
-      img.src = dataUrl;
+      // Set the source to the SVG data URL
+      img.src = svgDataUrl;
       
     } catch (error) {
       console.error('Error exporting signature:', error);
