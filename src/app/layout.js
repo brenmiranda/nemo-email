@@ -1,6 +1,5 @@
 import './globals.css';
 import './fonts.css';  
-import './fixed-fonts.css';
 import { SignatureProvider } from '../contexts/SignatureContext';
 
 export const metadata = {
