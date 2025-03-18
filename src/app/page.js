@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <div className="container">
       <div className="app-header">
-        <h1>Email Signature Generator</h1>
-        <p>Create on-brand email signatures with your company logo and brand font</p>
+        <h1>NEMO Signature Generator</h1>
+        <p>Create your email signature here.</p>
         
         <div className="nav-links">
           <Link href="/">Generator</Link>
