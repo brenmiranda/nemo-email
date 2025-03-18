@@ -30,7 +30,7 @@ export default function SignaturePreview() {
       return (
         <>
           {formData.phoneNumber}
-          <span style={{ margin: '0 0.4em' }}>|</span>
+          <span style={{ margin: '0 0.4em' }}>•</span>
           {formatEmail(formData.email)}
         </>
       );
