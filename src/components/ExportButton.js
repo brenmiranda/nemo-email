@@ -28,7 +28,7 @@ export default function ExportButton({ signatureRef }) {
         allowTaint: true,
         onclone: (clonedDoc) => {
           // Get the letter spacing from admin settings
-          const letterSpacing = adminSettings.letterSpacing || "-0.02em";
+          const letterSpacing = adminSettings.letterSpacing || "0.01em";
           
           // Apply letter spacing to all elements
           const allElements = clonedDoc.querySelectorAll('.signature-wrapper *');
