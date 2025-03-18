@@ -8,27 +8,40 @@ export default function SignaturePreview() {
   const { formData, adminSettings } = useSignature();
   const signatureRef = useRef(null);
   
+  // Format email to style the @ symbol differently
+  const formatEmail = (email) => {
+    if (!email) return '';
+    
+    const parts = email.split('@');
+    if (parts.length !== 2) return email; // If no @ or multiple @, return as is
+    
+    return (
+      <>
+        {parts[0]}
+        <span className="at-symbol">@</span>
+        {parts[1]}
+      </>
+    );
+  };
+  
   // Construct the contact line if both phone and email are provided
   const contactLine = () => {
     if (formData.phoneNumber && formData.email) {
-      return `${formData.phoneNumber} | ${formData.email}`;
+      return (
+        <>
+          {formData.phoneNumber} | {formatEmail(formData.email)}
+        </>
+      );
     } else if (formData.phoneNumber) {
       return formData.phoneNumber;
     } else if (formData.email) {
-      return formData.email;
+      return formatEmail(formData.email);
     }
     return '';
   };
 
   // Use the logo URL directly
   const logoUrl = formData.selectedLogo || null;
-
-  // Helper function to determine the correct font family based on weight
-  const getFontFamily = (weight) => {
-    if (weight >= 700) return 'CustomFontBold';
-    if (weight >= 500) return 'CustomFontMedium';
-    return 'CustomFontRegular';
-  };
 
   return (
     <div className="preview-section">
@@ -48,11 +61,6 @@ export default function SignaturePreview() {
               style={{
                 color: '#000000',
                 marginBottom: `${adminSettings.lineSpacing}px`,
-                fontFamily: 'CustomFontBold, sans-serif !important',
-                fontWeight: '700 !important',
-                // Force browser to recognize this as bold text
-                WebkitFontSmoothing: 'antialiased',
-                MozOsxFontSmoothing: 'grayscale',
               }}
             >
               {formData.fullName}
@@ -65,8 +73,6 @@ export default function SignaturePreview() {
               style={{
                 color: 'rgba(0, 0, 0, 0.5)',
                 marginBottom: `${adminSettings.lineSpacing}px`,
-                fontFamily: `${getFontFamily(adminSettings.positionWeight)}, sans-serif !important`,
-                fontWeight: `${adminSettings.positionWeight} !important`,
               }}
             >
               {formData.position}
@@ -79,8 +85,6 @@ export default function SignaturePreview() {
               style={{
                 color: 'rgba(0, 0, 0, 0.5)',
                 marginBottom: `${adminSettings.lineSpacing}px`,
-                fontFamily: `${getFontFamily(adminSettings.contactWeight)}, sans-serif !important`,
-                fontWeight: `${adminSettings.contactWeight} !important`,
               }}
             >
               {contactLine()}
